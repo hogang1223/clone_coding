@@ -9,7 +9,7 @@
 			<string>Editor</string>
 			<key>CFBundleURLSchemes</key>
 			<array>
-				<string></string>
+				<string>kakao</string>
 			</array>
 		</dict>
 	</array>

@@ -1,5 +1,5 @@
 //
-//  BlogList.swift
+//  BlogListView.swift
 //  SearchDaumBlog
 //
 //  Created by hogang on 2023/08/10.
@@ -10,7 +10,7 @@ import RxSwift
 import RxCocoa
 import SnapKit
 
-class BlogList: UITableView {
+class BlogListView: UITableView {
     let disposeBag = DisposeBag()
     
     let headerView = FilterView(
@@ -20,12 +20,9 @@ class BlogList: UITableView {
         )
     )
     
-    let cellData = PublishSubject<[BlogListCellData]>()
-    
     override init(frame: CGRect, style: UITableView.Style) {
         super.init(frame: frame, style: style)
-        
-        bind()
+
         attribute()
         layout()
     }
@@ -34,13 +31,14 @@ class BlogList: UITableView {
         fatalError("init(coder:) has not been implemented")
     }
     
-    private func bind() {
-        cellData
-            .asDriver(onErrorJustReturn: [])
+    func bind(_ viewModel: BlogListViewModel) {
+        headerView.bind(viewModel.filterViewModel)
+        
+        viewModel.cellData
             .drive(self.rx.items) { tv, row, data in
                 let index = IndexPath(row: row, section: 0)
                 let cell = tv.dequeueReusableCell(withIdentifier: "BlogListCell", for: index) as! BlogListCell
-                cell.setData(data)
+                cell.setData(data) 
                 return cell
             }
             .disposed(by: disposeBag)

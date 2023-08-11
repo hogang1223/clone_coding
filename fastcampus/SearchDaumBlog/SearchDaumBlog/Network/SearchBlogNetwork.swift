@@ -26,7 +26,7 @@ class SearchBlogNetwork {
         guard let url = api.searchBlog(query: query).url else { return .just(.failure(.invaildURL)) }
         let request = NSMutableURLRequest(url: url)
         request.httpMethod = "GET"
-        request.setValue("", forHTTPHeaderField: "Authorization")
+        request.setValue("KakaoAK ", forHTTPHeaderField: "Authorization")
         
         return session.rx.data(request: request as URLRequest)
             .map { data in
