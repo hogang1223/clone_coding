@@ -35,7 +35,7 @@ struct CategoryViewModel {
         
         self.cellData = Driver.just(categories)
         
-        self.itemSelected
+        itemSelected
             .map { categories[$0] }
             .bind(to: selectedCategory)
             .disposed(by: disposeBag)
@@ -43,6 +43,5 @@ struct CategoryViewModel {
         self.pop = itemSelected
             .map { _ in Void() }
             .asSignal(onErrorSignalWith: .empty())
-        
     }
 }

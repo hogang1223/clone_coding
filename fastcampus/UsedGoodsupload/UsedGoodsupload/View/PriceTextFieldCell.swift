@@ -12,12 +12,12 @@ import SnapKit
 
 class PriceTextFieldCell: UITableViewCell {
     let disposeBag = DisposeBag()
-    
     let priceInputField = UITextField()
     let freeShareButton = UIButton()
     
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
+        
         attribute()
         layout()
     }
@@ -28,7 +28,7 @@ class PriceTextFieldCell: UITableViewCell {
     
     func bind(_ viewModel: PriceTextFieldCellViewModel) {
         viewModel.showFreeShareButton
-            .map { $0 }
+            .map { !$0 }
             .emit(to: freeShareButton.rx.isHidden)
             .disposed(by: disposeBag)
         
@@ -45,7 +45,7 @@ class PriceTextFieldCell: UITableViewCell {
             .bind(to: viewModel.freeShareButtonTapped)
             .disposed(by: disposeBag)
     }
-    
+
     private func attribute() {
         freeShareButton.setTitle("무료나눔 ", for: .normal)
         freeShareButton.setTitleColor(.orange, for: .normal)

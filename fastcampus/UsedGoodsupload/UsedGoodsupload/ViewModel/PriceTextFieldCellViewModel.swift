@@ -12,7 +12,6 @@ import RxSwift
 struct PriceTextFieldCellViewModel {
     let showFreeShareButton: Signal<Bool>
     let resetPrice: Signal<Void>
-    
     let priceValue = PublishRelay<String?>()
     let freeShareButtonTapped = PublishRelay<Void>()
     

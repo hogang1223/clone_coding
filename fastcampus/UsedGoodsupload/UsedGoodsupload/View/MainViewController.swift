@@ -8,6 +8,11 @@
 import UIKit
 import RxSwift
 import RxCocoa
+import SnapKit
+
+import UIKit
+import RxSwift
+import RxCocoa
 
 class MainViewController: UIViewController {
     let disposeBag = DisposeBag()
@@ -78,7 +83,7 @@ class MainViewController: UIViewController {
         
         viewModel.push
             .drive(onNext: { viewModel in
-                let viewController = CategoryListViewController()
+                let viewController = CategoryViewController()
                 viewController.bind(viewModel)
                 self.show(viewController, sender: nil)
             })
